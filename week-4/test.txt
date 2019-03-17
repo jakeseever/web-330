@@ -1,1 +1,0 @@
-Check the console log to see the status!
