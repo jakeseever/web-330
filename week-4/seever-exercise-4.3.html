@@ -1,0 +1,49 @@
+<!--
+============================================
+; Title:  seever-exercise-4.3.html
+; Author: Jake Seever
+; Date:   16 March 2019
+; Description: HTTP PUT and DELETE Operations example
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment name</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+  <h4>HTTP DELETE Request</h4>
+
+  <button id="delete1">Delete Secuirity User</button>
+
+<script>
+
+    $(function() {
+      // Assign a click function to the delete button
+      $("#delete1").click(function(){
+        $.ajax({
+          url: 'http://httpbin.org/delete',
+          dataType: 'json',
+          type: 'DELETE',
+          data: {username: 'Boss', password: 'TopSecret', email: 'owner@me.com'}, // JSON data
+          success: function(data, status) {
+
+            // output the username, password, email and status to the console.
+            console.log('Username: ' + data.form.username + '\nPassword: ' + data.form.password + '\nEmail: ' + data.form.email + '\nStatus: ' + status);
+          }
+        })
+      })
+
+    });
+
+</script>
+
+</body>
+</html>

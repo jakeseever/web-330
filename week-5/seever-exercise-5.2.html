@@ -1,0 +1,63 @@
+<!--
+============================================
+; Title:  seever-exercise-5.2.html
+; Author: Jake Seever
+; Date:   21 March 2019
+; Description: Proxy pattern example
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercise 5.2 - The Proxy Pattern</title>
+
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <!-- jquery Reference Library -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a href="#" class="navbar-brand">Home</a>
+    </nav>
+
+    <br /><br />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-med-12">
+          <h2>Exercise 5.2 - The Proxy Pattern</h2>
+
+          <button class="btn btn-primary" id="btnPreviewProxy">Preview Proxy</button>
+
+          <br />
+
+          <span id="spanProxyResults"></span>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(function() {
+        var car = {
+          make: "BMW",
+          model: "550i xDrive",
+          display: function(){
+            // clear the span tag before adding new content
+            $("#spanProxyResults").html("");
+
+            // Append the make and model to the span tag.
+            $("#spanProxyResults").append("<br />Make: " + this.make + "<br />" + "Model: " + this.model);
+          }
+        };
+
+        // set a click event to the proxy button, pass in the car object, and call the display function.
+        $("#btnPreviewProxy").click($.proxy(car, "display"));
+
+      });
+    </script>
+  </body>
+</html>
