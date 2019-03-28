@@ -1,0 +1,83 @@
+<!--
+============================================
+; Title:  seever-exercise-6.2.html
+; Author: Jake Seever
+; Date:   28 March 2019
+; Description: View model function objects example
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Exercise 6.2</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.0.js"></script>
+</head>
+<body>
+
+   <!-- Create a navigation bar using Bootstrap-->
+   <nav class="navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <!-- Link to the Home page -->
+       <li class="nav-item active">
+         <a class="nav-link" href="#">Home</a>
+       </li>
+       <!-- Link to the About Page -->
+       <li class="nav-item">
+         <a class="nav-link"  href="#">About me</a>
+       </li>
+        <!-- Link to the Contact us page-->
+        <li class="nav-item">
+          <a class="nav-link" href="#" >Contact Us</a>
+        </li>
+      </ul>
+   </nav>
+
+   <div class="container" role="main">
+      <br /><br />
+
+      <h2>Person View Model</h2>
+
+      <div class="form-group">
+        <label for="txtFirstName">First Name:</label>
+        <input type="text" class="form-control alert-warning" data-bind="value: firstName" id="txtFirstName">
+      </div>
+
+      <div class="form-group">
+        <label for="txtLastName">Last Name:</label>
+        <input type="text" class="form-control alert-warning" data-bind="value: lastName" id="txtLastName">
+      </div>
+
+      <div class="form-group">
+        <label for="txtEmail">Email:</label>
+        <input type="text" class="form-control alert-warning" data-bind="value: email" id="txtEmail">
+      </div>
+
+   </div>
+
+<script>
+
+  // function to create a person view model object
+  function personViewModel() {
+    this.firstName = ko.observable("Abraham");
+    this.lastName = ko.observable("Lincoln");
+    this.email = ko.observable("alincoln@domain.com");
+  }
+
+  // Create a new person view model object.
+  ko.applyBindings(new personViewModel());
+
+</script>
+
+</body>
+
+</html>
