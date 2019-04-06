@@ -47,17 +47,17 @@
 
     <h2>The "foreach" binding</h2>
 
-    <!-- Create a table for each name and price row -->
+    <!-- Create a table for each title and price row -->
     <table class="table table-dark table-striped table-hover">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Title</th>
           <th>Price</th>
         </tr>
       </thead>
-      <tbody data-bind="foreach: fruits"> <!-- Loop over the fruits array -->
+      <tbody data-bind="foreach: textBooks"> <!-- Loop over the text books array -->
         <tr>
-          <td data-bind="text: name"></td>
+          <td data-bind="text: title"></td>
           <td data-bind="text: price"></td>
         </tr>
       </tbody>
@@ -69,17 +69,17 @@
 
 <script>
 
-  // New function to create a grocery view model
-  function GroceryViewModel(){
-    this.fruits = ko.observableArray([ // Create a fruits array with price
-      { name: "Orange", price: 1.09 },
-      { name: "Apple", price: 0.89 },
-      { name: "Pear", price: 0.75},
-      { name: "Mango", price: 1.49}
+  // New function to create a textbook view model
+  function textBookViewModel(){
+    this.textBooks = ko.observableArray([ // Create a textbook array with price
+      { title: "The Art of Strategic Planning for Information Technology", price: 59.99 },
+      { title: "Learning JavaScript Design Patterns", price: 44.99 },
+      { title: "Express in Action", price: 39.99},
+      { title: "Node.js in Action", price: 44.99}
     ]);
   }
 
-  ko.applyBindings(new GroceryViewModel()); // Create a new grocery view model and apply the knockoutJS bindings
+  ko.applyBindings(new textBookViewModel()); // Create a new textbook view model and apply the knockoutJS bindings
 
 </script>
 
