@@ -1,8 +1,8 @@
 <!--
 ============================================
-; Title:  seever-exercise-6.3.html
+; Title:  seever-discussion-7.1.html
 ; Author: Jake Seever
-; Date:   28 March 2019
+; Date:   03 April 2019
 ; Description: View model object literals example
 ;===========================================
 -->
@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Exercise 6.3</title>
+    <title>Discussion 7.1</title>
 
     <!-- Stylesheet - Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
@@ -45,36 +45,33 @@
  <div class="container" role="main">
   <br /><br />
 
-  <h2>Person Object Literal example</h2>
+  <h1 class="text-center">Custom KnockoutJS Bindings</h1>
 
-  <div class="form-group">
-    <label for="txtFirstName">First Name:</label>
-    <input type="text" class="form-control alert-warning" data-bind="value: firstName" id="txtFirstName">
+  <br />
+
+  <!-- Click jumbotron for displaying number of clicks -->
+  <div class="jumbotron" data-bind="click: incrementCounter">
+    <div class="container">
+      <h2 class="display-3 text-center" >You have clicked <span data-bind="text: clicks"></span> times</h2>
+      <br />
+      <h4 class="text-center">
+        Click anywhere in the Jumbotron to register a click.
+      </h4>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="txtLastName">Last Name:</label>
-    <input type="text" class="form-control alert-warning" data-bind="value: lastName" id="txtLastName">
-  </div>
 
-  <div class="form-group">
-    <label for="txtEmail">Email:</label>
-    <input type="text" class="form-control alert-warning" data-bind="value: email" id="txtEmail">
-  </div>
+<script type="text/JavaScript">
 
- </div>
+  var clickViewModel = {
+    clicks : ko.observable(0), // initialize an observable and set it to 0.
+      incrementCounter : function() { // Increment counter callback.
+        var previousCount = this.clicks(); // set the previous count to the clicks observable
+        this.clicks(previousCount + 1); // Add 1 to the previous click count.
+      }
+    };
 
-<script>
-
-  // create person view model object
-  var personViewModel = {
-    firstName: "Abraham",
-    lastName: "Lincoln",
-    email: "alincoln@domain.com"
-  };
-
-  // apply the person view model binding
-  ko.applyBindings(personViewModel);
+  ko.applyBindings(clickViewModel); // Apply the bindings
 
 </script>
 
