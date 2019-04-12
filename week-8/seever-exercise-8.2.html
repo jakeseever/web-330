@@ -1,0 +1,112 @@
+<!--
+============================================
+; Title:  seever-exercise-8.2.html
+; Author: Jake Seever
+; Date:   12 April 2019
+; Description: CR(Create Read) Operations Example
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Exercise 8.2</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous"/>
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.0.js"></script>
+
+  </head>
+  <body>
+
+    <!-- Create a navigation bar using Bootstrap-->
+    <nav class="navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+         <!-- Link to the Home page -->
+         <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+         </li>
+         <!-- Link to the About Page -->
+         <li class="nav-item">
+            <a class="nav-link"  href="#">About me</a>
+         </li>
+          <!-- Link to the Contact us page-->
+         <li class="nav-item">
+            <a class="nav-link" href="#" >Contact Us</a>
+         </li>
+        </ul>
+    </nav>
+    <br />
+
+    <div role="main" class="container">
+      <br /> <br />
+      <h2>CR Example</h2>
+      <br />
+
+      <div class="row" data-bind="if: error">
+        <div class="col-sm-12">
+          <div class="alert alert-danger">
+            <strong>Warning!</strong><span data-bind="text: error()"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card card-inverse" style="background-color:#333;border-color:#333;color:white;">
+            <div class="card-block p-3">
+              <h3 class="card-title">Employees</h3>
+                <div class="card-text">
+                  <div class="form-group row">
+                    <label for="txtEmployee" class="col-2 col-form-label">Name: </label>
+                    <div class="col-6">
+                      <input type="text" data-bind="value: nameToAdd, valueUpdate: 'afterkeydown'" class="form-control" id="txtEmployee" />
+                    </div>
+                    <div class="col-4">
+                      <a href="#" data-bind="click: add" class="btn btn-primary">Add</a>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txtEmployeeList">Employee List: </label>
+                    <select size="10" class="form-control" data-bind="options: employeeList" id="txtEmployeeList"></select>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      function EmployeeViewModel() {
+        this.nameToAdd = ko.observable(""); // Create an observable of the entered name
+        this.employeeList = ko.observableArray(["Jake Seever", "Richard Krasso", "Jordan Hennessey"]); // Create an observable array with test employees
+        this.error = ko.observable(""); // Create an observable error message.
+
+        this.add = function() {
+          if((this.nameToAdd() !=="") &&(this.employeeList.indexOf(this.nameToAdd()) <0)){ // Check if the name is blank or already exists
+            this.error(""); // Clear the error message
+            this.employeeList.push(this.nameToAdd()); // Push the entered name to the observable array.
+          }
+          else {
+            this.error("Duplicate or Invalid Entry."); // Out put the error message if needed.
+          }
+
+          this.nameToAdd(""); // Clear the name to add
+        }
+      }
+      ko.applyBindings(new EmployeeViewModel()); // Apply Knockout bindings and create a new employee view model.
+    </script>
+
+  </body>
+</html>
