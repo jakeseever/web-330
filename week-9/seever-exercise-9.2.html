@@ -1,0 +1,116 @@
+<!--
+============================================
+; Title:  seever-assignment-9.2.html
+; Author: Jake Seever
+; Date:   18 April 2019
+; Description: MVC Example
+;===========================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Assignment 9.2</title>
+
+      <!-- Stylesheet - Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+      <!-- JavaScript references -->
+      <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+  </head>
+  <body>
+
+    <!-- Create a navigation bar using Bootstrap-->
+    <nav class="navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+         <!-- Link to the Home page -->
+         <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+         </li>
+         <!-- Link to the About Page -->
+         <li class="nav-item">
+            <a class="nav-link"  href="#">About me</a>
+         </li>
+          <!-- Link to the Contact us page-->
+         <li class="nav-item">
+            <a class="nav-link" href="#" >Contact Us</a>
+         </li>
+        </ul>
+    </nav>
+
+    <div role="main" class="container">
+        <br />
+        <br />
+        <h1>Hello MVC Example</h1>
+        <p class="lead">Models and Collections..</p>
+
+        <div class="row">
+          <div class="col-sm-9">
+            <table class="table table-dark table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    <script>
+
+      function Employee(id, name, salary) { //Employee object constructor
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+      }
+
+      var EmployeeModel = Backbone.Model.extend({ // the model for creating an employee and its defaults
+        defaults: {
+          id: "",
+          name: "",
+          Salary: 0
+        }
+      });
+
+      var EmployeeCollection = Backbone.Collection.extend({
+        model: EmployeeModel
+      });
+
+      // create 5 test employee objects
+      var Employees = new EmployeeCollection();
+      Employees.add(new Employee("100", "Jake Seever", 100000));
+      Employees.add(new Employee("101", "Max Hayden", 87000));
+      Employees.add(new Employee("102", "Evelyn Kizeski", 89000));
+      Employees.add(new Employee("103", "Alisha Stieve", 95000));
+      Employees.add(new Employee("104", "Chee Her", 90000));
+
+      // Iterate over each employee in the collection
+      Employees.each(function(employee) {
+        $("#table-body").append( // Append the table body and add employee rows to the table
+          "<tr>" +
+            "<td>" +
+            employee.get("id") + // get the employee's id
+            "</td>" +
+            "<td>" +
+            employee.get("name") + // get the employee's name
+            "</td>" +
+            "<td>" +
+            employee.get("salary") + // get the employee's salary
+            "</td>" +
+            "</tr>"
+        );
+      });
+
+    </script>
+
+  </body>
+
+</html>
